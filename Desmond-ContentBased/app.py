@@ -5,8 +5,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 from itertools import combinations
 
 # Load the dataset
-movies_df = pd.read_csv('movies.csv', nrows=62424)
-tags_df = pd.read_csv('tags.csv', nrows=62424)
+movies_df = pd.read_csv('movies.csv', nrows=5000)
+tags_df = pd.read_csv('tags.csv', nrows=5000)
 
 # Dropping any unused columns
 tags_df = tags_df.drop(['userId', 'timestamp'], axis=1).reset_index(drop=True)
@@ -68,7 +68,7 @@ recommended_features = set(merged.loc[1:3, 'genres'].str.split('|').sum() + merg
 feature_coverage = len(recommended_features) / len(total_features)
 
 # Display Streamlit app
-st.title('Movie Recommender System')
+st.title('Movie Recommender System - Content-Based Filtering')
 user_input = st.text_input('Enter a movie title:')
 if user_input:
     movie_index = merged[merged['title'].str.lower() == user_input.lower()].index
